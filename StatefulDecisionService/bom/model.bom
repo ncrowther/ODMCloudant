@@ -1,0 +1,12 @@
+
+property loadGetterSetterAsProperties "true"
+property origin "xom:/EngieServicePayment//ServicePayment_XOM"
+property uuid "c67a9d07-5720-4d0c-9cfb-7675ed255fa6"
+
+public class virtual
+{
+    public static final java.util.Date daysBeforeNow(int subtractDays, java.util.Date actualDate);
+    public static final string formattedDate(java.util.Date date);
+    public static final java.util.Date now();
+}
+

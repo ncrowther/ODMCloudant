@@ -1,0 +1,44 @@
+/////////////////////////////////////////////////////////////////////
+// Licensed Materials - Property of IBM
+// 5725-T17 
+// Copyright IBM Corp. 2014, 2015. All Rights Reserved.
+//
+// U.S. Government Users Restricted Rights: 
+// Use, duplication or disclosure restricted by GSA ADP Schedule 
+// Contract with IBM Corp.
+/////////////////////////////////////////////////////////////////////
+
+doctype html
+html
+
+head
+  title Purchase Details
+  meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
+  link(rel="stylesheet", href="/stylesheets/style.css")
+
+  body
+  table
+    tr
+      td(style= "width:30%;" )
+        img(src="/images/shop.jpg")
+      td
+         div
+            p.
+            h1 Purchase Details
+            p.
+            p.
+               Customer ID: #{customerId}
+            p.
+               Product: #{product}
+            p.
+               Price £: #{pricePounds}               
+            p.
+               Purchase Date: #{purchaseTimestamp}
+            p.
+               Discount: #{discount}%
+            p.
+               Discount Reason: #{discountReason}      
+            p.
+            form(action='/',method='get')
+               table
+                    input(type='submit',value='Back to main screen',data-transition='fade')

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ibm.rules.studio.model.decisionservice:Operation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ibm.rules.studio.model.decisionservice="http://com.ibm.rules.studio/model/decisionservice.ecore" xmlns:ilog.rules.studio.model.query.extractor="http://ilog.rules.studio/model/query/extractor.ecore" rulesetName="CheckDiscount" usingRuleflow="true" ruleflowName="processCustomer" targetRuleProjectName="DiscountRules">
+  <name>CheckDiscount</name>
+  <uuid>e1506da9-de72-49b1-b719-5ddade5cf58d</uuid>
+  <referencedVariables variableName="customer" variableSetName="vars" direction="IN_OUT">
+    <variableSet href="../rules/vars.var#554125b7-1d53-42ad-a2ce-547ad8de2920"/>
+  </referencedVariables>
+  <ruleflow href="../rules/processCustomer.rfl#d07278df-d4cc-48ca-ac9e-618ac43bb69d"/>
+  <extractor xsi:type="ilog.rules.studio.model.query.extractor:QueryExtractor" name="CheckDiscount_extractor" validator="Default Validator"/>
+  <targetRuleProject href="../../StatefulDecisionService#bd6954f8-2b40-4dcb-bd00-14cf2edf7c74"/>
+</com.ibm.rules.studio.model.decisionservice:Operation>

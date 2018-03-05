@@ -1,0 +1,20 @@
+{
+  "__DecisionID__": "0",
+  "customer": {
+    "customerId": "123456",
+    "purchase": {
+      "product": "Jackson coffee",
+      "price": 300,
+      "purchaseTimestamp": "2008-09-29T01:49:45.000+0000"
+    },
+    "discount": 0,
+    "discountReason": "",
+    "purchaseHistory": [
+      {
+        "product": "Kopi coffee",
+        "price": 300,
+        "purchaseTimestamp": "2008-09-29T01:49:45.000+0000"
+      }
+    ]
+  }
+}

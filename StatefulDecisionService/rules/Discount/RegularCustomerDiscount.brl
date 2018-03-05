@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.brl:ActionRule xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.brl="http://ilog.rules.studio/model/brl.ecore">
+  <name>RegularCustomerDiscount</name>
+  <uuid>fe73892a-7b05-4bc4-8c03-f0d52b38505a</uuid>
+  <documentation><![CDATA[if 
+  the customer has purchased more than 2 items in the last 10 days 
+then 
+   apply 10% discount to the shopping basket of the customer;
+
+]]></documentation>
+  <locale>en_GB</locale>
+  <definition><![CDATA[definitions
+    set purchasesInLastSixtyDays to the purchase history of 'the customer' 
+            where the purchase timestamp of each purchase is after 60 days before now ;
+if
+    the number of purchases in purchasesInLastSixtyDays is more than 2
+then
+    set the discount of 'the customer' to 10 ;
+    set the discount reason of 'the customer' to "10% discount for 3 purchases in last 60 days";
+    set the price of the purchase of 'the customer' to the price of the purchase of 'the customer' * 0.9;
+    
+    ]]></definition>
+</ilog.rules.studio.model.brl:ActionRule>

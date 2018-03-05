@@ -1,0 +1,27 @@
+# Vocabulary Properties
+uuid = 7365506e-61f7-4032-b56d-fbf417dc0414
+
+# Term: purchase history
+@purchase\ history#plural = purchase history
+
+# ibm.rules.purchase.Customer
+ibm.rules.purchase.Customer#concept.label = customer
+ibm.rules.purchase.Customer.addPurchaseHistory(ibm.rules.purchase.Purchase)#phrase.action = add {0} to the purchase history of {this}
+ibm.rules.purchase.Customer.customerId#phrase.action = set the customer id of {this} to {customer id}
+ibm.rules.purchase.Customer.customerId#phrase.navigation = {customer id} of {this}
+ibm.rules.purchase.Customer.discount#phrase.action = set the discount of {this} to {discount}
+ibm.rules.purchase.Customer.discount#phrase.navigation = {discount} of {this}
+ibm.rules.purchase.Customer.discountReason#phrase.action = set the discount reason of {this} to {discount reason}
+ibm.rules.purchase.Customer.discountReason#phrase.navigation = {discount reason} of {this}
+ibm.rules.purchase.Customer.purchase#phrase.action = set the purchase of {this} to {purchase}
+ibm.rules.purchase.Customer.purchase#phrase.navigation = {purchase} of {this}
+ibm.rules.purchase.Customer.purchaseHistory#phrase.navigation = {purchase history} of {this}
+
+# ibm.rules.purchase.Purchase
+ibm.rules.purchase.Purchase#concept.label = purchase
+ibm.rules.purchase.Purchase.price#phrase.action = set the price of {this} to {price}
+ibm.rules.purchase.Purchase.price#phrase.navigation = {price} of {this}
+ibm.rules.purchase.Purchase.product#phrase.action = set the product of {this} to {product}
+ibm.rules.purchase.Purchase.product#phrase.navigation = {product} of {this}
+ibm.rules.purchase.Purchase.purchaseTimestamp#phrase.action = set the purchase timestamp of {this} to {purchase timestamp}
+ibm.rules.purchase.Purchase.purchaseTimestamp#phrase.navigation = {purchase timestamp} of {this}

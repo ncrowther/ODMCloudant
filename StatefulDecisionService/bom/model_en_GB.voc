@@ -1,0 +1,8 @@
+# Vocabulary Properties
+uuid = 568e6e09-7a54-4b69-be0b-bff17704ff0e
+
+# virtual
+virtual#concept.label = virtual
+virtual.daysBeforeNow(int,java.util.Date)#phrase.navigation = {0} days before {1}
+virtual.formattedDate(java.util.Date)#phrase.navigation = formatted date {0}
+virtual.now()#phrase.navigation = now

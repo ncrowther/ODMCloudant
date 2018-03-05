@@ -1,0 +1,31 @@
+
+property loadGetterSetterAsProperties "true"
+property origin "xom:/DiscountRules//Discount_XOM"
+property uuid "61e95268-8872-4dfb-8a62-03ca52fe921e"
+package ibm.rules.purchase;
+
+
+public class Customer
+        extends java.io.Serializable
+{
+    public string customerId;
+    public int discount;
+    public string discountReason;
+    public ibm.rules.purchase.Purchase purchase;
+    public readonly java.util.List purchaseHistory domain 0,* class ibm.rules.purchase.Purchase;
+    public Customer();
+    public void addPurchaseHistory(ibm.rules.purchase.Purchase arg);
+    public string toString();
+}
+
+public class Purchase
+        extends java.io.Serializable
+{
+    public int price;
+    public string product;
+    public java.util.Date purchaseTimestamp;
+    public Purchase(string arg1, int arg2, java.util.Date arg3);
+    public Purchase();
+    public string toString();
+}
+
