@@ -1,4 +1,8 @@
 # ODMCloudant
 Example of a stateful decision service using ODM and Cloudant
 
-Read the tutorial.doc in this folder for more details
+See tutorial.pdf in this folder for more details:
+
+https://github.com/ncrowther/ODMCloudant/blob/master/tutorial.docx
+
+
