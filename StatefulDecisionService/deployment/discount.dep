@@ -2,7 +2,7 @@
 <com.ibm.rules.studio.model.decisionservice:Deployment xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:com.ibm.rules.studio.model.decisionservice="http://com.ibm.rules.studio/model/decisionservice.ecore" ruleAppName="discount" managingXom="true">
   <name>discount</name>
   <uuid>a5f5e106-67b5-40fe-b1fa-f4d74df79f25</uuid>
-  <targets label="Odm ion Cloud"/>
+  <targets label="localhost"/>
   <operations operationName="CheckDiscount">
     <operation href="CheckDiscount.dop#e1506da9-de72-49b1-b719-5ddade5cf58d"/>
     <properties key="ruleset.version">

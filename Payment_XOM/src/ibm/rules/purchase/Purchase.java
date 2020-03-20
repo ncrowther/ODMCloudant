@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class Purchase implements java.io.Serializable
 {
-	private static final long serialVersionUID = -43408878778721809L;
 
 	private String product;
 	private int price;

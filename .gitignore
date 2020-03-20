@@ -1,0 +1,7 @@
+
+DecisionServiceFacade-nodejs/logger/node_modules/
+DecisionServiceFacade-nodejs/node_modules/
+StatefulDecisionService/output/
+Payment_XOM/bin
+StatefulDecisionService/reports/
+log/

@@ -6,11 +6,14 @@
 	},
 	"description": "Example Stateful Business Rules service",
 	"dependencies": {
-		"cfenv": "1.0.x",
+		"@cloudant/cloudant": "^4.2.4",
+		"cfenv": "^1.2.2",
 		"cloudant": "^1.7.x",
+		"colors": "^1.4.0",
 		"couchimport": "^0.7.0",
-		"express": "4.13.x",
-		"jade": "1.1.4"
+		"express": "^4.17.1",
+		"jade": "1.1.4",
+		"nano": "^8.2.2"
 	},
 	"engines": {
 		"node": "4.x"

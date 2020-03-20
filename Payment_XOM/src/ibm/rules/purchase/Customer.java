@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Customer implements java.io.Serializable
 {
-	private static final long serialVersionUID = -4340422764478721809L;
 	
 	private String customerId;
 	private Purchase purchase;
