@@ -2,8 +2,8 @@
 	"name": "CoffeeShop",
 	"version": "0.0.1",
 	"scripts": {
-		"start": "node app.js"
-	},
+    "start": "if [[ $NODE_ENV == 'production' ]]; then node ./bin/www; else nodemon ./bin/www; fi"
+  },
 	"description": "Example Stateful Business Rules service",
 	"dependencies": {
 		"@cloudant/cloudant": "^4.2.4",
