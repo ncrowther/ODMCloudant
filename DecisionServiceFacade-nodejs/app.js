@@ -63,7 +63,7 @@ cloudant.db.create(dbName, function (err, data) {
     // err if database doesn't already exists
     console.log('Created database: ' + dbName)
   } else {
-    console.error('DB already created: ' + dbName)
+    console.log('DB already created: ' + dbName)
   }
 })
 
@@ -74,11 +74,15 @@ console.log('Connected to db: ' + customerdb + ' using ' + dbName)
 
 // render index page
 app.get('/', function (req, res) {
+  console.log('P{urchase Item}')
+
   res.render('purchaseItem')
 })
 
 // Invoke work order
 app.get('/purchase', function (req, res) {
+  console.log('Purchase')
+
   // get the request parameters
   var purchaseHistory
 
@@ -195,7 +199,7 @@ app.use(function (err, req, res, next) {
   res.render('error')
 })
 
-
+/*
 // The IP address of the Cloud Foundry DEA (Droplet Execution Agent) that hosts
 // this application:
 var host = 'localhost'
@@ -204,4 +208,7 @@ var host = 'localhost'
 var port = 8080
 // Start server
 app.listen(port, host)
+
 console.log('App started on port ' + port)
+
+*/
