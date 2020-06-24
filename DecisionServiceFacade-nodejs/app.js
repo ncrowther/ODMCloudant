@@ -212,3 +212,5 @@ app.listen(port, host)
 console.log('App started on port ' + port)
 
 */
+
+module.exports = app

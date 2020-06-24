@@ -1,23 +1,24 @@
 {
-	"name": "CoffeeShop",
-	"version": "0.0.1",
-	"scripts": {
-    "start": "if [[ $NODE_ENV == 'production' ]]; then node ./bin/www; else nodemon ./bin/www; fi"
+  "name": "coffeeshop",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www"
   },
-	"description": "Example Stateful Business Rules service",
-	"dependencies": {
-		"@cloudant/cloudant": "^4.2.4",
-		"cfenv": "^1.2.2",
-		"cloudant": "^1.7.x",
-		"colors": "^1.4.0",
-		"couchimport": "^0.7.0",
-		"express": "^4.17.1",
-		"morgan": "^1.10.0",
-		"nano": "^8.2.2",
-		"pug": "^2.0.4"
-	},
-	"engines": {
-		"node": "4.x"
-	},
-	"repository": {}
+  "dependencies": {
+    "@cloudant/cloudant": "^4.2.4",
+    "cloudant": "^1.7.x",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^8.1.0",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "pg": "^7.12.1",
+    "pug": "2.0.0-beta11"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.2"
+  }
 }
