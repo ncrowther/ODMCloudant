@@ -14,9 +14,12 @@
 // and jade as template engine (http://jade-lang.com/).
 
 var express = require('express')
-var cfenv = require('cfenv')
 var service = require('./service')
 var Cloudant = require('cloudant')
+// var cookieParser = require('cookie-parser')
+var createError = require('http-errors')
+var path = require('path')
+var logger = require('morgan')
 
 // setup middleware
 var app = express()
@@ -28,9 +31,20 @@ var cloudant = Cloudant({ account: username, password: password })
 // database name
 var dbName = 'customerdb'
 
-app.use(express.static(__dirname + '/public')) // setup static public directory
+app.use(logger('dev'))
+
+// view engine setup
+// app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
-app.set('views', __dirname + '/views')
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+// app.use(cookieParser())
+app.use(express.static(path.join(__dirname, 'public')))
+app.set('views', path.join(__dirname, 'views'))
+
+// app.use(express.static(__dirname + '/public')) // setup static public directory
+// app.set('view engine', 'pug')
+// app.set('views', __dirname + '/views')
 
 var checkDiscountRulesetPath = '/discount/CheckDiscount'
 
@@ -41,10 +55,7 @@ var rules = {
   password: 'resAdmin'
 }
 
-// /////////////////////// IBM CLOUD /////////////////////////
-// get the app environment from Cloud Foundry
-
-var appEnv = cfenv.getAppEnv()
+// ///////////////////////
 
 // Create a new database.
 cloudant.db.create(dbName, function (err, data) {
@@ -168,14 +179,29 @@ function invokeDecisionService (customerId, product, price, purchaseDate, purcha
   })
 }
 
-/*
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+  next(createError(404))
+})
 
+// error handler
+app.use(function (err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message
+  res.locals.error = req.app.get('env') === 'development' ? err : {}
+
+  // render the error page
+  res.status(err.status || 500)
+  res.render('error')
+})
+
+/*
 // The IP address of the Cloud Foundry DEA (Droplet Execution Agent) that hosts
 // this application:
-var host = ((appEnv.app && appEnv.app.host) || 'localhost')
+var host = 'localhost'
 
 // The port on the DEA for communication with the application:
-var port = ((appEnv.app && appEnv.app.host) || 8080)
+var port = 8080
 // Start server
 app.listen(port, host)
 console.log('App started on port ' + port)
