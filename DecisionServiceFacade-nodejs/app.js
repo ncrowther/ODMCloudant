@@ -168,12 +168,19 @@ function invokeDecisionService (customerId, product, price, purchaseDate, purcha
   })
 }
 
+app.listen(8080, function () {
+  console.log('Example app listening on port 8080!')
+})
+
+/*
+
 // The IP address of the Cloud Foundry DEA (Droplet Execution Agent) that hosts
 // this application:
 var host = ((appEnv.app && appEnv.app.host) || 'localhost')
 
 // The port on the DEA for communication with the application:
-var port = ((appEnv.app && appEnv.app.host) || 3000)
+var port = ((appEnv.app && appEnv.app.host) || 8080)
 // Start server
 app.listen(port, host)
 console.log('App started on port ' + port)
+*/
