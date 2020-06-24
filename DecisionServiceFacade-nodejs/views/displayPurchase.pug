@@ -22,23 +22,23 @@ head
       td(style= "width:30%;" )
         img(src="/images/shop.jpg")
       td
-         div
-            p.
-            h1 Purchase Details
-            p.
-            p.
-               Customer ID: #{customerId}
-            p.
-               Product: #{product}
-            p.
-               Price £: #{pricePounds}               
-            p.
-               Purchase Date: #{purchaseTimestamp}
-            p.
-               Discount: #{discount}%
-            p.
-               Discount Reason: #{discountReason}      
-            p.
-            form(action='/',method='get')
-               table
-                    input(type='submit',value='Back to main screen',data-transition='fade')
+        div
+          p.
+          h1 Purchase Details
+          p.
+          p.
+            Customer ID: #{customerId}
+          p.
+            Product: #{product}
+          p.
+            Price £: #{pricePounds}               
+          p.
+            Purchase Date: #{purchaseTimestamp}
+          p.
+            Discount: #{discount}%
+          p.
+            Discount Reason: #{discountReason}      
+          p.
+          form(action='/',method='get')
+            table
+              input(type='submit',value='Back to main screen',data-transition='fade')

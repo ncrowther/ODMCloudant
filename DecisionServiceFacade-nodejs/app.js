@@ -15,30 +15,28 @@
 
 var express = require('express')
 var cfenv = require('cfenv')
-var service = require('./utils/odm')
-const logger = require('./logger')
-
-const Cloudant = require('@cloudant/cloudant')
-
-const vcap = require('./config/vcap-local.json')
+var service = require('./service')
+var Cloudant = require('cloudant')
 
 // setup middleware
 var app = express()
 
+// Initialize the DB when this module is loaded
+var username = '724c8e7f-5faa-49e1-8dc0-7a39ffd871ad-bluemix'
+var password = '4b70c44615f871a95e501f5ce871a607072d69e206ad76af5ad020aa7e205f64'
+var cloudant = Cloudant({ account: username, password: password })
 // database name
 var dbName = 'customerdb'
 
 app.use(express.static(__dirname + '/public')) // setup static public directory
-app.set('view engine', 'jade');
-app.set('views', __dirname + '/views');
+app.set('view engine', 'pug')
+app.set('views', __dirname + '/views')
 
 var checkDiscountRulesetPath = '/discount/CheckDiscount'
 
-
 // The section below provides  the credentials to bind to the ODM on Cloud service
-
 var rules = {
-  executionRestUrl: 'http://localhost:9090/DecisionService/rest',
+  executionRestUrl: 'https://uk-cp4a-deployment-odm-ds-console-route-cp4a-all.mycluster-lon02-b3c8x32-4d2c0e6e364e1cb6bda1360a996d18f0-0000.eu-gb.containers.appdomain.cloud/DecisionService/rest',
   user: 'resAdmin',
   password: 'resAdmin'
 }
@@ -48,15 +46,18 @@ var rules = {
 
 var appEnv = cfenv.getAppEnv()
 
-// The section below provides  the credentials to bind to the Cloudant service on IBM Cloud
-
-// Initialize the DB when this module is loaded
-var username = 'c9b0d887-7523-46b4-9122-5ca60a387436-bluemix'
-var password = '9edfa48393fead9d70a4513965c088b58da08e28514e9ad7c5fbf7d743f9b246'
-var cloudant = Cloudant({ account: username, password: password })
+// Create a new database.
+cloudant.db.create(dbName, function (err, data) {
+  if (!err) {
+    // err if database doesn't already exists
+    console.log('Created database: ' + dbName)
+  } else {
+    console.error('DB already created: ' + dbName)
+  }
+})
 
 // Specify the database we are going to use...
-var customerdb = cloudant.use(dbName)
+var customerdb = cloudant.db.use(dbName)
 
 console.log('Connected to db: ' + customerdb + ' using ' + dbName)
 
@@ -69,6 +70,7 @@ app.get('/', function (req, res) {
 app.get('/purchase', function (req, res) {
   // get the request parameters
   var purchaseHistory
+
   var customerId = req.query.customerId
   var product = req.query.product
   var price = req.query.price * 1000
@@ -89,6 +91,7 @@ app.get('/purchase', function (req, res) {
       rev = data._rev
       console.log(rev)
 
+      // ///////////////////////
       invokeDecisionService(customerId, product, price, purchaseDate, purchaseHistory, res, rev)
     } else {
       console.log('Customer not found in database')
@@ -97,7 +100,7 @@ app.get('/purchase', function (req, res) {
   })
 })
 
-async function invokeDecisionService (customerId, product, price, purchaseDate, purchaseHistory, res, rev) {
+function invokeDecisionService (customerId, product, price, purchaseDate, purchaseHistory, res, rev) {
   var payload = {
     __DecisionID__: '0',
     customer: {
@@ -115,53 +118,53 @@ async function invokeDecisionService (customerId, product, price, purchaseDate, 
 
   console.log('****Payload:', JSON.stringify(payload))
 
-  const results = await service.invokeRulesService(rules, checkDiscountRulesetPath, payload, customerId)
+  service.invokeRulesService(rules, checkDiscountRulesetPath, payload, function (results) {
+    console.log('***results: ' + JSON.stringify(results))
 
-  console.log('***results: ' + JSON.stringify(results))
+    if (!customerdb) {
+      console.log('NO DB: ')
+      return
+    }
 
-  if (!customerdb) {
-    console.log('NO DB: ')
-    return
-  }
+    if (rev) {
+      console.log('Update _rev: ' + rev)
+      // insert the event as a document
+      customerdb.insert({
+        _id: customerId,
+        _rev: rev,
+        customer: results.customer
+      }, function (err, body, header) {
+        if (err) {
+          return console.log('[customerdb.update] ', err.message)
+        } else {
+          console.log('Updated Customer in database.')
+        }
+      })
+    } else {
+      console.log('Insert ')
+      // insert the event as a document
+      customerdb.insert({
+        _id: customerId,
+        customer: results.customer
+      }, function (err, body, header) {
+        if (err) {
+          return console.log('[customerdb.insert] ', err.message)
+        } else {
+          console.log('Inserted Customer in database.')
+        }
+      })
+    }
 
-  if (rev) {
-    console.log('Update _rev: ' + rev)
-    // insert the event as a document
-    customerdb.insert({
-      _id: customerId,
-      _rev: rev,
-      customer: results.customer
-    }, function (err, body, header) {
-      if (err) {
-        return console.log('[customerdb.update] ', err.message)
-      } else {
-        console.log('Updated Customer in database.')
-      }
+    var pricePounds = results.customer.purchase.price * 0.001
+
+    res.render('displayPurchase', {
+      customerId: results.customer.customerId,
+      product: results.customer.purchase.product,
+      pricePounds: pricePounds.toFixed(2),
+      purchaseTimestamp: results.customer.purchase.purchaseTimestamp,
+      discount: results.customer.discount,
+      discountReason: results.customer.discountReason
     })
-  } else {
-    console.log('Insert ')
-    // insert the event as a document
-    customerdb.insert({
-      _id: customerId,
-      customer: results.customer
-    }, function (err, body, header) {
-      if (err) {
-        return console.log('[customerdb.insert] ', err.message)
-      } else {
-        console.log('Inserted Customer in database.')
-      }
-    })
-  }
-
-  var pricePounds = results.customer.purchase.price * 0.001
-
-  res.render('displayPurchase', {
-    customerId: results.customer.customerId,
-    product: results.customer.purchase.product,
-    pricePounds: pricePounds.toFixed(2),
-    purchaseTimestamp: results.customer.purchase.purchaseTimestamp,
-    discount: results.customer.discount,
-    discountReason: results.customer.discountReason
   })
 }
 
@@ -170,8 +173,7 @@ async function invokeDecisionService (customerId, product, price, purchaseDate, 
 var host = ((appEnv.app && appEnv.app.host) || 'localhost')
 
 // The port on the DEA for communication with the application:
-var port = ((appEnv.app && appEnv.app.port) || 3000)
-
+var port = ((appEnv.app && appEnv.app.host) || 3000)
 // Start server
 app.listen(port, host)
 console.log('App started on port ' + port)

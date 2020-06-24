@@ -12,7 +12,7 @@
 		"colors": "^1.4.0",
 		"couchimport": "^0.7.0",
 		"express": "^4.17.1",
-		"jade": "1.1.4",
+		"pug": "^2.0.4",
 		"nano": "^8.2.2"
 	},
 	"engines": {
