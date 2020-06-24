@@ -12,8 +12,9 @@
 		"colors": "^1.4.0",
 		"couchimport": "^0.7.0",
 		"express": "^4.17.1",
-		"pug": "^2.0.4",
-		"nano": "^8.2.2"
+		"morgan": "^1.10.0",
+		"nano": "^8.2.2",
+		"pug": "^2.0.4"
 	},
 	"engines": {
 		"node": "4.x"

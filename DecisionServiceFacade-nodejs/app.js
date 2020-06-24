@@ -195,7 +195,7 @@ app.use(function (err, req, res, next) {
   res.render('error')
 })
 
-/*
+
 // The IP address of the Cloud Foundry DEA (Droplet Execution Agent) that hosts
 // this application:
 var host = 'localhost'
@@ -205,4 +205,3 @@ var port = 8080
 // Start server
 app.listen(port, host)
 console.log('App started on port ' + port)
-*/
