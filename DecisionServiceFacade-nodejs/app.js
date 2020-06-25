@@ -24,12 +24,16 @@ var logger = require('morgan')
 // setup middleware
 var app = express()
 
-const ODM_SECRET_PASSWORD = process.env.odm_secret_password || 'INVALID PASSWORD'
+const ODM_SECRET_USER = process.env.odm_secret_user || 'INVALID ODM USER'
+const ODM_SECRET_PASSWORD = process.env.odm_secret_password || 'INVALID ODM PASSWORD'
+
+const CLOUDANT_SECRET_USER = process.env.cloudant_secret_user || 'INVALID CLOUDANT USER'
+const CLOUDANT_SECRET_PASSWORD = process.env.cloudant_secret_password || 'INVALID CLOUDANT PASSWORD'
 
 // Initialize the DB when this module is loaded
-var username = '724c8e7f-5faa-49e1-8dc0-7a39ffd871ad-bluemix'
+// var username = '724c8e7f-5faa-49e1-8dc0-7a39ffd871ad-bluemix'
 // var password = '4b70c44615f871a95e501f5ce871a607072d69e206ad76af5ad020aa7e205f64'
-var cloudant = Cloudant({ account: username, password: ODM_SECRET_PASSWORD })
+var cloudant = Cloudant({ account: CLOUDANT_SECRET_USER, password: CLOUDANT_SECRET_PASSWORD })
 // database name
 var dbName = 'customerdb'
 
@@ -53,8 +57,8 @@ var checkDiscountRulesetPath = '/discount/CheckDiscount'
 // The section below provides  the credentials to bind to the ODM on Cloud service
 var rules = {
   executionRestUrl: 'https://uk-cp4a-deployment-odm-ds-console-route-cp4a-all.mycluster-lon02-b3c8x32-4d2c0e6e364e1cb6bda1360a996d18f0-0000.eu-gb.containers.appdomain.cloud/DecisionService/rest',
-  user: 'resAdmin',
-  password: 'resAdmin'
+  user: ODM_SECRET_USER,
+  password: ODM_SECRET_PASSWORD
 }
 
 // ///////////////////////
