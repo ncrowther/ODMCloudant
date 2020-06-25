@@ -24,7 +24,6 @@ var logger = require('morgan')
 // setup middleware
 var app = express()
 
-const ODM_USER = process.env.odm_user || 'INVALID ODM USER'
 const ODM_SECRET_USER = process.env.odm_secret_user || 'INVALID ODM USER'
 const ODM_SECRET_PASSWORD = process.env.odm_secret_password || 'INVALID ODM PASSWORD'
 
@@ -32,7 +31,6 @@ const CLOUDANT_SECRET_USER = process.env.cloudant_secret_user || 'INVALID CLOUDA
 const CLOUDANT_SECRET_PASSWORD = process.env.cloudant_secret_password || 'INVALID CLOUDANT PASSWORD'
 
 console.log('ODM_SECRET_USER: ' + ODM_SECRET_USER)
-console.log('ODM_USER: ' + ODM_USER)
 console.log('ODM_SECRET_PASSWORD : ' + ODM_SECRET_PASSWORD)
 console.log('CLOUDANT_SECRET_USER: ' + CLOUDANT_SECRET_USER)
 console.log('CLOUDANT_SECRET_PASSWORD : ' + CLOUDANT_SECRET_PASSWORD)
