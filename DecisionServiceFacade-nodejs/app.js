@@ -24,10 +24,12 @@ var logger = require('morgan')
 // setup middleware
 var app = express()
 
+const ODM_SECRET_PASSWORD = process.env.odm_secret_password || 'INVALID PASSWORD'
+
 // Initialize the DB when this module is loaded
 var username = '724c8e7f-5faa-49e1-8dc0-7a39ffd871ad-bluemix'
-var password = '4b70c44615f871a95e501f5ce871a607072d69e206ad76af5ad020aa7e205f64'
-var cloudant = Cloudant({ account: username, password: password })
+// var password = '4b70c44615f871a95e501f5ce871a607072d69e206ad76af5ad020aa7e205f64'
+var cloudant = Cloudant({ account: username, password: ODM_SECRET_PASSWORD })
 // database name
 var dbName = 'customerdb'
 
