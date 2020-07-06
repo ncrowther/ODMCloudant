@@ -31,6 +31,7 @@ const ODM_SECRET_PASSWORD = process.env.odm_secret_password || 'INVALID ODM PASS
 const CLOUDANT_SECRET_USER = process.env.cloudant_secret_user || 'INVALID CLOUDANT USER'
 const CLOUDANT_SECRET_PASSWORD = process.env.cloudant_secret_password || 'INVALID CLOUDANT PASSWORD'
 
+console.log('ODM_URL: ' + ODM_URL)
 console.log('ODM_SECRET_USER: ' + ODM_SECRET_USER)
 console.log('ODM_SECRET_PASSWORD : ' + ODM_SECRET_PASSWORD)
 console.log('CLOUDANT_SECRET_USER: ' + CLOUDANT_SECRET_USER)
