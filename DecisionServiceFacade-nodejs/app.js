@@ -25,8 +25,8 @@ var logger = require('morgan')
 var app = express()
 
 const ODM_URL = process.env.odm_url || 'https://uk-cp4a-deployment-odm-ds-console-route-cp4a-all.mycluster-lon02-b3c8x32-4d2c0e6e364e1cb6bda1360a996d18f0-0000.eu-gb.containers.appdomain.cloud/DecisionService/rest'
-const ODM_SECRET_USER = process.env.odm_secret_user || 'INVALID ODM USER'
-const ODM_SECRET_PASSWORD = process.env.odm_secret_password || 'INVALID ODM PASSWORD'
+const ODM_SECRET_USER = process.env.odm_secret.odm_secret_user || 'INVALID ODM USER'
+const ODM_SECRET_PASSWORD = process.env.odm_secret.odm_secret_password || 'INVALID ODM PASSWORD'
 
 const CLOUDANT_SECRET_USER = process.env.cloudant_secret_user || 'INVALID CLOUDANT USER'
 const CLOUDANT_SECRET_PASSWORD = process.env.cloudant_secret_password || 'INVALID CLOUDANT PASSWORD'
